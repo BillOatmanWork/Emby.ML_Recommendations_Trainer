@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using ML_Recommendations_Trainer.Data;
 
 namespace ML_Recommendations_Trainer
 {

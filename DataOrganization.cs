@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 
-namespace ML_Recommendations_Trainer.Data
+namespace ML_Recommendations_Trainer
 {
     public class DataOrganization
     {
