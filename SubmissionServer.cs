@@ -20,10 +20,10 @@ namespace ML_Recommendations_Trainer
 
         public byte[] ProcessYourResponse(string data)
         {
-            //TODO: We need some security here. Some kind of data check, and sender ip check so we don;t get Ddos'd.
+            //TODO: We need some security here. Some kind of data check, and sender ip check so we don't get Ddos'd.
             var submissionDataFolder = Path.Combine(Directory.GetCurrentDirectory(), "Data");
             var files = Directory.GetFiles(submissionDataFolder).Where(f => f.EndsWith(".csv"));
-            var trainingFileName = $"recommendation-ratings-train_{files.Count() + 1}.csv";
+            var trainingFileName = $"recommendation-ratings-{files.Count() + 1}-train.csv";
             using (var sw = new StreamWriter(Path.Combine(submissionDataFolder, trainingFileName)))
             {
                 sw.Write(data);
