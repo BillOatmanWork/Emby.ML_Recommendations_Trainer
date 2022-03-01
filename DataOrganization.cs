@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -13,9 +14,10 @@ namespace ML_Recommendations_Trainer
             var submittedTrainingData = Directory.GetFiles(dataPath).Where(f => f.EndsWith("-train.csv"));
 
             var masterMovieRatingList = DeserializeCsvData(master.FullName, "userId,tmdbId,rating");
-
+            Console.WriteLine(submittedTrainingData.Count() + " files will be processed.");
             foreach (var file in submittedTrainingData)
             {
+                
                 var data = DeserializeCsvData(file);
                 foreach (var item in data)
                 {
@@ -24,7 +26,6 @@ namespace ML_Recommendations_Trainer
                         masterMovieRatingList.Add(item);
                     }
                 }
-
             }
 
             SerializeCsvData(masterMovieRatingList, master.FullName, "userId,tmdbId,rating");
@@ -39,7 +40,8 @@ namespace ML_Recommendations_Trainer
                 {
                     var line = sr.ReadLine();
                     if (line == header || line.Contains(",,")) continue; //strip the header, and ignore lines with missing data
-                    
+                    if (line.Contains("--bound")) continue;
+                    if (line == "Content-Disposition: form-data; name=bilddatei; filename=upload.csv; filename*=utf-8''upload.csv") continue;
                     var lineValues = line.Split(",");
                     t.Add(new MovieRating()
                     {
